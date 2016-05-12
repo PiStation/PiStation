@@ -1,1 +1,5 @@
+connectors
+!connectors/.gitdir
+modules
+!modules/.gitdir
 .idea
