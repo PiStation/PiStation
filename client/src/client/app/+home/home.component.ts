@@ -14,10 +14,8 @@ export class HomeComponent {
   newName: string;
   constructor(public nameListService: NameListService, actionService : ActionService) {
     const observable = actionService.getAllActions().subscribe((event) => {
-      console.log(event);
+      console.log('eventtt', event);
     });
-    console.log('test');
-    console.log('ob', observable);
   }
 
   /*

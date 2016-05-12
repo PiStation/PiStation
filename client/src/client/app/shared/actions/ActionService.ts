@@ -6,15 +6,12 @@ export class ActionService {
 
     constructor() {
         this.socket = io('http://localhost:31415');
-        this.socket.on('defineAllModules', (test) => {
-            console.log('hier wel?', test);
-        });
     }
 
     getAllActions() : Rx.Observable<PiStationModule[]> {
-        this.socket.emit('getAllActions');
+        this.socket.emit('getAllModules');
         return Rx.Observable.create(observer => {
-            this.socket.on('defineAllModules', (data) => observer.onNext(data));
+            this.socket.on('defineAllModules', (data) => observer.next(data));
         });
     }
 }
