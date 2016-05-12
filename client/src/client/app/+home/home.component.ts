@@ -12,7 +12,13 @@ import {ActionService} from "../shared/actions/ActionService";
 })
 export class HomeComponent {
   newName: string;
-  constructor(public nameListService: NameListService, actionService : ActionService) {}
+  constructor(public nameListService: NameListService, actionService : ActionService) {
+    const observable = actionService.getAllActions().subscribe((event) => {
+      console.log(event);
+    });
+    console.log('test');
+    console.log('ob', observable);
+  }
 
   /*
    * @param newname  any text as input.

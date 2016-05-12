@@ -21,4 +21,8 @@ import { NameListService, NavbarComponent, ToolbarComponent, ActionService} from
     component: AboutComponent
   }
 ])
-export class AppComponent {}
+export class AppComponent {
+  constructor(){
+
+  }
+}
