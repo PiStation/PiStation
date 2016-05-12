@@ -2,6 +2,7 @@ import { FORM_DIRECTIVES } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { NameListService } from '../shared/index';
+import {ActionService} from "../shared/actions/ActionService";
 
 @Component({
   selector: 'sd-home',
@@ -11,7 +12,7 @@ import { NameListService } from '../shared/index';
 })
 export class HomeComponent {
   newName: string;
-  constructor(public nameListService: NameListService) {}
+  constructor(public nameListService: NameListService, actionService : ActionService) {}
 
   /*
    * @param newname  any text as input.

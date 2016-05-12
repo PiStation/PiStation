@@ -1,3 +1,4 @@
+
 export class NameListService {
   names = [
     'Edsger Dijkstra',
@@ -11,5 +12,7 @@ export class NameListService {
   }
   add(value: string): void {
     this.names.push(value);
+  }
+  constructor(){
   }
 }
