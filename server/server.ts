@@ -1,3 +1,4 @@
+/// <reference path="node.d.ts" />
 var io = require("socket.io").listen(31415);
 
 io.sockets.on("connection", function (socket) {
@@ -10,14 +11,14 @@ io.sockets.on("connection", function (socket) {
                 {
                     name: 'kakuLights',
                     functions: [
-                            {
-                                name: 'powerControl',
-                                arguments: [{type:'bool', name:'enabled'}]
-                            },
-                            {
-                                name: 'dim',
-                                arguments: [{type:'bit', name:'dimmingLevel'}]
-                            }
+                        {
+                            name: 'powerControl',
+                            arguments: [{type:'bool', name:'enabled'}]
+                        },
+                        {
+                            name: 'dim',
+                            arguments: [{type:'bit', name:'dimmingLevel'}]
+                        }
                     ]
                 }
             ]
@@ -28,3 +29,4 @@ io.sockets.on("connection", function (socket) {
         console.log("disconnecting ", data);
     });
 });
+
