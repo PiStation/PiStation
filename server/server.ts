@@ -1,4 +1,7 @@
 /// <reference path="node.d.ts" />
+
+import "../PiStation.ts"
+
 var io = require("socket.io").listen(31415);
 
 io.sockets.on("connection", function (socket) {
@@ -6,23 +9,17 @@ io.sockets.on("connection", function (socket) {
 
     socket.on("getAllModules", function (data) {
         console.log('Asking all actions!', data);
-        socket.emit('defineAllModules',
-            [
-                {
-                    name: 'kakuLights',
-                    functions: [
-                        {
-                            name: 'powerControl',
-                            arguments: [{type:'bool', name:'enabled'}]
-                        },
-                        {
-                            name: 'dim',
-                            arguments: [{type:'bit', name:'dimmingLevel'}]
-                        }
-                    ]
-                }
-            ]
-        );
+        var mockModules = [
+            new PiStation.Module(
+                'kakuLights',
+                [
+                    new PiStation.Function('powerControl', [new PiStation.Argument('enabled', 'bool')]),
+                    new PiStation.Function('dim', [new PiStation.Argument('dimmingLevel', 'bit')])
+                ]
+            )
+        ];
+        console.log('Returning:', mockModules);
+        socket.emit('defineAllModules', mockModules);
     });
 
     socket.on("disconnect", function (data) {
