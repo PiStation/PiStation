@@ -1,5 +1,5 @@
 import {Observable} from "rxjs/Observable";
-import "../../../../../PiStation.ts"
+import * as PiStation from '../../../../../../PiStation.ts'
 
 export class ActionService {
     private socket : SocketIOClient.Socket;
