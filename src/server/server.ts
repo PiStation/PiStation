@@ -1,5 +1,3 @@
-/// <reference path="node.d.ts" />
-
 import * as PiStation from '../PiStation.ts';
 
 var io = require("socket.io").listen(31415);
