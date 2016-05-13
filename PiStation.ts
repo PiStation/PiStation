@@ -1,39 +1,38 @@
-module PiStation {
-    export class Module {
-        functions: PiStation.Function[];
-        name: string;
 
-        constructor(name: string, functionArray: PiStation.Function[]) {
-            this.functions = functionArray;
-        }
+export class Module {
+    functions: Function[];
+    name: string;
 
-        addFunction(func: PiStation.Function) {
-            this.functions.push(func);
-        }
-
+    constructor(name: string, functionArray: Function[]) {
+        this.functions = functionArray;
     }
 
-    export class Function {
-        arguments: PiStation.Argument[];
-        name: string;
-
-        constructor(name: string, argumentArray: PiStation.Argument[]) {
-            this.arguments = argumentArray;
-        }
-
-        addFunction(arg: PiStation.Argument) {
-            this.arguments.push(arg);
-        }
-
+    addFunction(func: Function) {
+        this.functions.push(func);
     }
 
-    export class Argument {
-        type: string;
-        name: string;
+}
 
-        constructor(type: string, name:string) {
-            this.type = type;
-            this.name = name;
-        }
+export class Function {
+    arguments: Argument[];
+    name: string;
+
+    constructor(name: string, argumentArray: Argument[]) {
+        this.arguments = argumentArray;
+    }
+
+    addFunction(arg: Argument) {
+        this.arguments.push(arg);
+    }
+
+}
+
+export class Argument {
+    type: string;
+    name: string;
+
+    constructor(type: string, name:string) {
+        this.type = type;
+        this.name = name;
     }
 }
