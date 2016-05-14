@@ -5,7 +5,7 @@ io.sockets.on("connection", function (socket: any) {
     console.log('A Client has Connected to this Server');
 
     socket.on("getAllModules", function (data: any) {
-        console.log('Asking all actions!', data);
+        console.log('Asking all modules!', data);
         var mockModules = [
             new PiStation.Module(
                 'kakuLights',
@@ -23,4 +23,3 @@ io.sockets.on("connection", function (socket: any) {
         console.log("disconnecting ", data);
     });
 });
-
