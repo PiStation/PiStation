@@ -1,7 +1,6 @@
 /// <reference path="../../../socket.io.d.ts"/>
-import {Observable} from "rxjs/Observable";
 import * as PiStation from '../../../../PiStation.ts';
-import {Observer} from "rxjs/Observer";
+import {Observable} from 'rxjs/Observable';
 
 export class ActionService {
     private socket : SocketIOClient.Socket;
