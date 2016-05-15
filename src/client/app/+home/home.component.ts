@@ -13,9 +13,7 @@ import {ActionService} from "../shared/actions/ActionService";
 export class HomeComponent {
   newName: string;
   constructor(public nameListService: NameListService, actionService : ActionService) {
-    const subscription = actionService.getAllModules().subscribe((event) => {
-      console.log('eventtt', event);
-    });
+
   }
 
   /*
