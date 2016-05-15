@@ -1,7 +1,8 @@
+import {Injectable} from '@angular/core';
 import * as PiStation from '../../../PiStation';
 import * as Rx from 'rxjs/Rx';
 
-export class ActionService {
+@Injectable() export class ModuleService {
     private socket : SocketIOClient.Socket;
 
     constructor() {
@@ -14,3 +15,4 @@ export class ActionService {
         return Rx.Observable.fromEvent<PiStation.Module[]>(this.socket, PiStation.Events.GET_ALL_MODULES);
     }
 }
+
