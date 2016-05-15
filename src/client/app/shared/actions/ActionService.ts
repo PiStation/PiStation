@@ -1,5 +1,5 @@
-import * as PiStation from '../../../../PiStation.ts';
-import {Observable} from 'rxjs/Rx';
+import * as PiStation from '../../../PiStation';
+import * as Rx from 'rxjs/Rx';
 
 export class ActionService {
     private socket : SocketIOClient.Socket;
@@ -9,10 +9,8 @@ export class ActionService {
         //console.log(new PiStation.Argument('bla', 'bloe'));
     }
 
-    getAllModules() : Observable<PiStation.Module[]> {
-        this.socket.emit('getAllModules');
-        return Observable.create((observer : any) => {
-            this.socket.on('defineAllModules', (data : PiStation.Module[]) => observer.next(data));
-        });
+    getAllModules() : Rx.Observable<PiStation.Module[]> {
+        this.socket.emit(PiStation.Events.GET_ALL_MODULES);
+        return Rx.Observable.fromEvent<PiStation.Module[]>(this.socket, PiStation.Events.GET_ALL_MODULES);
     }
 }

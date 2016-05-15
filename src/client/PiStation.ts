@@ -1,4 +1,3 @@
-
 export class Module {
     functions: Function[];
     name: string;
@@ -38,3 +37,8 @@ export class Argument {
         this.name = name;
     }
 }
+
+export class Events {
+    static GET_ALL_MODULES = 'getAllModules';
+}
+

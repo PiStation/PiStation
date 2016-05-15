@@ -1,10 +1,10 @@
-import * as PiStation from '../PiStation.ts';
+import * as PiStation from '../client/PiStation.ts';
 var io = require("socket.io").listen(31415);
 
 io.sockets.on("connection", function (socket: any) {
     console.log('A Client has Connected to this Server');
 
-    socket.on("getAllModules", function (data: any) {
+    socket.on(PiStation.Events.GET_ALL_MODULES, function (data: any) {
         console.log('Asking all modules!', data);
         var mockModules = [
             new PiStation.Module(
@@ -16,7 +16,7 @@ io.sockets.on("connection", function (socket: any) {
             )
         ];
         console.log('Returning:', mockModules);
-        socket.emit('defineAllModules', mockModules);
+        socket.emit(PiStation.Events.GET_ALL_MODULES, mockModules);
     });
 
     socket.on("disconnect", function (data: any) {
