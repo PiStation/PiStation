@@ -1,4 +1,3 @@
-/// <reference path="../../../socket.io.d.ts"/>
 import * as PiStation from '../../../../PiStation.ts';
 import {Observable} from 'rxjs/Observable';
 

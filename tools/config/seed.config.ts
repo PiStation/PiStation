@@ -144,7 +144,17 @@ export class SeedConfig {
       },
       'rxjs': {
         defaultExtension: 'js'
-      }
+      },
+      '@angular2-material/core': {
+        format: 'cjs',
+        defaultExtension: 'js',
+        main: 'core.js'
+      },
+      '@angular2-material/checkbox': {
+        format: 'cjs',
+        defaultExtension: 'js',
+        main: 'checkbox.js'
+      },
     }
   };
 
