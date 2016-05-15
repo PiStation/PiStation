@@ -4,6 +4,7 @@ export class Module {
     name: string;
 
     constructor(name: string, functionArray: Function[]) {
+        this.name = name;
         this.functions = functionArray;
     }
 
@@ -18,6 +19,7 @@ export class Function {
     name: string;
 
     constructor(name: string, argumentArray: Argument[]) {
+        this.name = name;
         this.arguments = argumentArray;
     }
 

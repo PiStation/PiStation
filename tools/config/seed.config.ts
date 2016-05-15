@@ -84,7 +84,8 @@ export class SeedConfig {
     packageConfigPaths: [
       `${this.APP_BASE}node_modules/*/package.json`,
       `${this.APP_BASE}node_modules/**/package.json`,
-      `${this.APP_BASE}node_modules/@angular/*/package.json`
+      `${this.APP_BASE}node_modules/@angular/*/package.json`,
+      `${this.APP_BASE}node_modules/@angular2-material/*/package.json`
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
@@ -154,6 +155,16 @@ export class SeedConfig {
         format: 'cjs',
         defaultExtension: 'js',
         main: 'checkbox.js'
+      },
+      '@angular2-material/list': {
+        format: 'cjs',
+        defaultExtension: 'js',
+        main: 'list.js'
+      },
+      '@angular2-material/icon': {
+        format: 'cjs',
+        defaultExtension: 'js',
+        main: 'icon.js'
       },
     }
   };

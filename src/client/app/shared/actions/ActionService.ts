@@ -1,5 +1,5 @@
 import * as PiStation from '../../../../PiStation.ts';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 
 export class ActionService {
     private socket : SocketIOClient.Socket;
