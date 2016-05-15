@@ -39,6 +39,8 @@ export class Argument {
 }
 
 export class Events {
+    static CLIENT_CONNECTED = 'connection';
+    static CLIENT_DISCONNECTED = 'disconnect';
     static GET_ALL_MODULES = 'getAllModules';
 }
 

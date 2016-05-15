@@ -1,7 +1,7 @@
 import * as PiStation from '../client/PiStation.ts';
 var io = require("socket.io").listen(31415);
 
-io.sockets.on("connection", function (socket: any) {
+io.sockets.on(PiStation.Events.CLIENT_CONNECTED, function (socket: any) {
     console.log('A Client has Connected to this Server');
 
     socket.on(PiStation.Events.GET_ALL_MODULES, function (data: any) {
@@ -19,7 +19,7 @@ io.sockets.on("connection", function (socket: any) {
         socket.emit(PiStation.Events.GET_ALL_MODULES, mockModules);
     });
 
-    socket.on("disconnect", function (data: any) {
+    socket.on(PiStation.Events.CLIENT_DISCONNECTED, function (data: any) {
         console.log("disconnecting ", data);
     });
 });
