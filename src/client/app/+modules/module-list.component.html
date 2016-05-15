@@ -1,0 +1,11 @@
+<md-list>
+    <section *ngFor="let module of (modules | async)">
+        <h3 md-subheader>{{module?.name}}</h3>
+        <md-list-item *ngFor="let function of module?.functions">
+            <md-icon class="material-icons" md-list-avatar>folder</md-icon>
+            <h4 md-line>{{function?.name}}</h4>
+            <p md-line class="demo-2"> Arguments {{function?.aguments?.length}} </p>
+        </md-list-item>
+        <md-divider></md-divider>
+    </section>
+</md-list>
