@@ -13,7 +13,7 @@ export class TestModule extends PiStation.Module implements AbstractModule {
 
         let dummyFunction = new PiStation.Function('powerControl', [new PiStation.Argument('enabled', 'bool')]);
 
-        this.addFunction(dummyFunction);
+        this.addFunction(dummyFunction); //regiser on module
 
 
         dummyFunction.callStream.subscribe((arguments : PiStation.Argument) => this.asyncDummyFunction(arguments))
@@ -24,12 +24,12 @@ export class TestModule extends PiStation.Module implements AbstractModule {
         console.log(`Called Dummy Function with arguments ${arguments}`);
 
         const dummyFunction = Rx.Observable //dummy update stream from connector
-            .interval(500)
-            .timeInterval()
-            .take(3);
+            .interval(500) //500 ms interval events
+            .timeInterval() // map naar IntervalData
+            .take(3); //pak er 3
 
         dummyFunction.subscribe((update) => {
-            console.log(`Dummy send update ${update}`);
+            console.log(`Dummy send update ${update}`); //output log for testing module
         });
 
         return dummyFunction;
