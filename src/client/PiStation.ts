@@ -18,9 +18,10 @@ export class Module implements AbstractModule {
         return this.functionCallStream = Rx.Observable
             .mergeAll(
                 this.functions
-                    .map((func:Function) => Rx.Observable
-                        .fromEvent(clientSocket, `${this}:${func}`)
-                        .map((functionArguments) => <Argument[]>functionArguments)));
+                    .map((func:Function) =>
+                        Rx.Observable
+                            .fromEvent(clientSocket, `${func.eventName}`)
+                            .map((functionArguments) => <Argument[]>functionArguments)));
     }
 
     register(app:PiStationServer):PiStationServer {
