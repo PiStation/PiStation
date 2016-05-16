@@ -4,7 +4,7 @@ import {PiStationServer, PiStationServerEvent} from './app/server';
 
 const app = new PiStationServer();
 
-app.addModule()
+//app.addModule()
 
 app.on(`${PiStation.Events.GetAllModules}`).subscribe(function (event : PiStationServerEvent) {
     console.log('Asking all modules!', event);
