@@ -1,7 +1,7 @@
 import * as io from "socket.io";
 import * as PiStation from "../../client/PiStation";
 import * as  Rx from 'rxjs/Rx';
-const RxNode = require('rx-node');
+
 export interface PiStationServerEvent {
     socket: SocketIO.Socket;
     data: any;
