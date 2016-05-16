@@ -1,3 +1,6 @@
+#Typings
+src/server/typings
+
 # Logs
 logs
 *.log
@@ -48,3 +51,6 @@ gulpfile.js.map
 
 connectors
 !connectors/.gitdir
+
+modules
+!modules/.gitdir
