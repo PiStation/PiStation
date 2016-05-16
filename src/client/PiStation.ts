@@ -37,10 +37,37 @@ export class Argument {
         this.name = name;
     }
 }
-
-export class Events {
-    static CLIENT_CONNECTED = 'connection';
-    static CLIENT_DISCONNECTED = 'disconnect';
-    static GET_ALL_MODULES = 'getAllModules';
+export class ServerEvent {
+    name: string;
+    constructor(name : string) {
+        this.name = name;
+    }
+    toString(){
+        return this.name;
+    }
 }
+export class SystemEvent extends ServerEvent {
+    constructor(name : string){
+        super(name);
+    }
+}
+export class ModuleEvent extends ServerEvent {
+    private moduleName : string;
+    private functionName:string;
 
+    constructor(name : string){
+        super(name);
+        [this.moduleName,this.functionName] = name.split(':') || [name, 'start'];
+    }
+    getModuleName():string{
+        return this.moduleName;
+    }
+    getFunctionName():string {
+        return this.functionName;
+    }
+}
+export class Events {
+    static ClientConnected = new ServerEvent('connection');
+    static ClientDisconnected = new ServerEvent('disconnect');
+    static GetAllModules = new SystemEvent('getAllModules');
+}

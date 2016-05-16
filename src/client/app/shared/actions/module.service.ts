@@ -2,12 +2,15 @@ import {Injectable} from '@angular/core';
 import * as PiStation from '../../../PiStation';
 import * as Rx from 'rxjs/Rx';
 
+import {fromEvent} from 'rxjs/Observable/fromEvent';
+import Observable = Rx.Observable;
+
 @Injectable() export class ModuleService {
     private socket : SocketIOClient.Socket = io.connect('http://localhost:31415');
 
     getAllModules() : Rx.Observable<PiStation.Module[]> {
-        this.socket.emit(PiStation.Events.GET_ALL_MODULES);
-        return Rx.Observable.fromEvent<PiStation.Module[]>(this.socket, PiStation.Events.GET_ALL_MODULES);
+        this.socket.emit(`${PiStation.Events.GetAllModules}`);
+        return Observable.fromEvent<PiStation.Module[]>(this.socket, `${PiStation.Events.GetAllModules}`);
     }
 
     sendModuleFunction(module : PiStation.Module, func : PiStation.Function, args: PiStation.Argument[] = []) {
