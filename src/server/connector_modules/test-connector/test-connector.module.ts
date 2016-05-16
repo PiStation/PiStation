@@ -23,15 +23,15 @@ export class TestModule extends PiStation.Module implements AbstractModule {
     asyncDummyFunction(arguments){
         console.log(`Called Dummy Function with arguments ${arguments}`);
 
-        const dummyFunction = Rx.Observable //dummy update stream from connector
+        const dummyFunctionUpdates = Rx.Observable //dummy update stream from connector
             .interval(500) //500 ms interval events
             .timeInterval() // map naar IntervalData
             .take(3); //pak er 3
 
-        dummyFunction.subscribe((update) => {
+        dummyFunctionUpdates.subscribe((update) => {
             console.log(`Dummy send update ${update}`); //output log for testing module
         });
 
-        return dummyFunction;
+        return dummyFunctionUpdates;
     }
 }
