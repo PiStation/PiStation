@@ -2,7 +2,7 @@ import { FORM_DIRECTIVES } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { NameListService } from '../shared/index';
-import {ActionService} from "../shared/actions/ActionService";
+import {ModuleService} from "../shared/index";
 
 @Component({
   selector: 'sd-home',
@@ -12,7 +12,7 @@ import {ActionService} from "../shared/actions/ActionService";
 })
 export class HomeComponent {
   newName: string;
-  constructor(public nameListService: NameListService, actionService : ActionService) {
+  constructor(public nameListService: NameListService, actionService : ModuleService) {
 
   }
 
