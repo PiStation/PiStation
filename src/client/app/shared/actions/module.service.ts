@@ -9,8 +9,8 @@ import Observable = Rx.Observable;
     private socket : SocketIOClient.Socket = io.connect('http://localhost:31415');
 
     getAllModules() : Rx.Observable<PiStation.Module[]> {
-        this.socket.emit(`${PiStation.Events.GetAllModules}`);
-        return Observable.fromEvent<PiStation.Module[]>(this.socket, `${PiStation.Events.GetAllModules}`);
+        this.socket.emit(`${PiStation.Events.GET_ALL_MODULES}`);
+        return Observable.fromEvent<PiStation.Module[]>(this.socket, `${PiStation.Events.GET_ALL_MODULES}`);
     }
 
     sendModuleFunction(module : PiStation.Module, func : PiStation.Function, args: PiStation.Argument[] = []) {

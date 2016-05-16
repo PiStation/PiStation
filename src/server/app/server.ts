@@ -9,17 +9,18 @@ export interface PiStationServerEvent {
 
 export class PiStationServer {
     private socketServer:SocketIO.Server;
-    private modules:PiStation.Module[] = [];
+    private modules:PiStation.AbstractModule[] = [];
     private listeners:string[];
 
     public clientConnections:Rx.Observable<SocketIO.Socket>;
 
     constructor(private port:number = 31415) {
         this.socketServer = io(port);
-        this.clientConnections = Rx.Observable.create((observer : any) => this.socketServer.on(`${PiStation.Events.ClientConnected}`,(socket : any) => observer.next(socket)));
+        this.clientConnections = Rx.Observable.create((observer : any) => this.socketServer.on(`${PiStation.Events.CLIENT_CONNECTED}`,(socket : any) => observer.next(socket)));
 
         this.clientConnections
-            .forEach((socket : SocketIO.Socket) => console.log('New Connection'));
+            .forEach((socket : SocketIO.Socket) => console.log(`New client connection | ID: ${socket.client.id} IP address: ${socket.client.conn.remoteAddress}`))
+            .forEach((socket : SocketIO.Socket) => this.subscribeClientOnModuleEvents(socket));
     }
 
     addModule(module:PiStation.Module) {
@@ -33,4 +34,9 @@ export class PiStationServer {
                     .map((data: any) => <PiStationServerEvent>{data: data, socket: socket}));
     }
 
+    private subscribeClientOnModuleEvents(socket:SocketIO.Socket):any {
+        this.modules.map((module : PiStation.Module) => {
+            module.addFunction()
+        })
+    }
 }

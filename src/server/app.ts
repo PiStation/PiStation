@@ -4,9 +4,18 @@ import {PiStationServer, PiStationServerEvent} from './app/server';
 
 const app = new PiStationServer();
 
-//app.addModule()
+const module =   new PiStation.Module(
+    'kakuLights',
+    [
+        new PiStation.Function('powerControl', [new PiStation.Argument('enabled', 'bool')]),
+        new PiStation.Function('dim', [new PiStation.Argument('dimmingLevel', 'bit')])
+    ]
+);
 
-app.on(`${PiStation.Events.GetAllModules}`).subscribe(function (event : PiStationServerEvent) {
+app.addModule(module);
+
+
+app.on(`${PiStation.Events.GET_ALL_MODULES}`).subscribe(function (event : PiStationServerEvent) {
     console.log('Asking all modules!', event);
     var mockModules = [
         new PiStation.Module(
@@ -18,9 +27,9 @@ app.on(`${PiStation.Events.GetAllModules}`).subscribe(function (event : PiStatio
         )
     ];
     console.log('Returning:', mockModules);
-    event.socket.emit(`${PiStation.Events.GetAllModules}`, mockModules);
+    event.socket.emit(`${PiStation.Events.GET_ALL_MODULES}`, mockModules);
 });
 
-app.on(`${PiStation.Events.ClientDisconnected}`).subscribe(function (event : PiStationServerEvent) {
+app.on(`${PiStation.Events.CLIENT_DISCONNECTED}`).subscribe(function (event : PiStationServerEvent) {
     console.log("disconnecting");
 });

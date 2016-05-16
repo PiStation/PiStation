@@ -1,31 +1,65 @@
-export class Module {
-    functions: Function[];
+import {PiStationServer} from "../server/app/server";
+import * as Rx from 'rxjs/Rx';
+export interface AbstractModule {
+    register(app : PiStationServer) : PiStationServer;
+    toString() : string
+}
+export class Module implements AbstractModule {
     name: string;
+    functions: Function[];
+    functionCallStream : Rx.Observable<Function>;
 
-    constructor(name: string, functionArray: Function[]) {
+    constructor(name: string, functionArray: Function[] = []) {
         this.name = name;
         this.functions = functionArray;
     }
 
-    addFunction(func: Function) {
-        this.functions.push(func);
+    registerFunctionUpdatesForClient(clientSocket : SocketIO.Socket){
+        return this.functionCallStream = Rx.Observable
+            .mergeAll(
+                this.functions
+                    .map((func:Function) => Rx.Observable
+                        .fromEvent(clientSocket, `${this}:${func}`)
+                        .map((functionArguments) => <Argument[]>functionArguments)));
     }
 
+    register(app:PiStationServer):PiStationServer {
+        return app;
+    }
+
+
+    toString() : string {
+        return this.name;
+    }
+
+    addFunction(func: Function) {
+        func.module = this;
+        this.functions.push(func);
+    }
 }
 
 export class Function {
     arguments: Argument[];
     name: string;
+    module : Module;
+    callStream : Rx.Observable<Argument[]>;
 
-    constructor(name: string, argumentArray: Argument[]) {
+    constructor(name: string, argumentArray: Argument[] = []) {
         this.name = name;
         this.arguments = argumentArray;
     }
 
-    addFunction(arg: Argument) {
+    addArguments(arg: Argument) {
         this.arguments.push(arg);
     }
 
+    toString() : string {
+        return this.name;
+    }
+
+    get eventName() : string {
+        return `${this.module || 'AnonymousFunction'}:${this.name}`;
+    }
 }
 
 export class Argument {
@@ -46,28 +80,34 @@ export class ServerEvent {
         return this.name;
     }
 }
+
 export class SystemEvent extends ServerEvent {
     constructor(name : string){
         super(name);
     }
 }
-export class ModuleEvent extends ServerEvent {
-    private moduleName : string;
-    private functionName:string;
 
-    constructor(name : string){
-        super(name);
-        [this.moduleName,this.functionName] = name.split(':') || [name, 'start'];
+export class ModuleEvent extends ServerEvent {
+    constructor(private moduleName : Module | string,
+                private functionName : string){
+        super(`${moduleName}:${functionName}`);
     }
+
+    static fromEventName(eventName : string) : ModuleEvent{
+        let [moduleName,functionName] = name.split(':') || [name, 'start'];
+        return new ModuleEvent(moduleName, functionName);
+    }
+
     getModuleName():string{
-        return this.moduleName;
+        return `${this.moduleName}`;
     }
     getFunctionName():string {
         return this.functionName;
     }
 }
+
 export class Events {
-    static ClientConnected = new ServerEvent('connection');
-    static ClientDisconnected = new ServerEvent('disconnect');
-    static GetAllModules = new SystemEvent('getAllModules');
+    static CLIENT_CONNECTED = new ServerEvent('connection');
+    static CLIENT_DISCONNECTED = new ServerEvent('disconnect');
+    static GET_ALL_MODULES = new SystemEvent('getAllModules');
 }
