@@ -13,7 +13,7 @@ export class TestModule extends PiStation.Module implements AbstractModule {
 
         let dummyFunction = new PiStation.Function('powerControl', [new PiStation.Argument('enabled', 'bool')]);
 
-        this.addFunction(dummyFunction); //regiser on module
+        this.addFunction(dummyFunction); //register on module
 
 
         dummyFunction.callStream.subscribe((arguments : PiStation.Argument) => this.asyncDummyFunction(arguments))

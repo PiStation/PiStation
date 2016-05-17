@@ -15,13 +15,12 @@ export class Module implements AbstractModule {
     }
 
     registerFunctionUpdatesForClient(clientSocket : SocketIO.Socket){
-        return this.functionCallStream = Rx.Observable
-            .mergeAll(
-                this.functions
-                    .map((func:Function) =>
-                        Rx.Observable
-                            .fromEvent(clientSocket, `${func.eventName}`)
-                            .map((functionArguments) => <Argument[]>functionArguments)));
+        this.functionCallStream.merge(...this.functions.map((func:Function) =>
+            func.callStream
+                .merge(
+                    Rx.Observable
+                        .fromEvent(clientSocket, `${func.eventName}`)
+                        .map(args=> <Argument[]>args))));
     }
 
     register(app:PiStationServer):PiStationServer {
@@ -48,6 +47,7 @@ export class Function {
     constructor(name: string, argumentArray: Argument[] = []) {
         this.name = name;
         this.arguments = argumentArray;
+        this.callStream = Rx.Observable.empty<Argument[]>();
     }
 
     addArguments(arg: Argument) {

@@ -13,11 +13,7 @@ import Observable = Rx.Observable;
         return Observable.fromEvent<PiStation.Module[]>(this.socket, `${PiStation.Events.GET_ALL_MODULES}`);
     }
 
-    sendModuleFunction(module : PiStation.Module, func : PiStation.Function, args: PiStation.Argument[] = []) {
-        this.socket.emit(this.getEventNameForModuleFunction(module, func), args);
-    }
-
-    private getEventNameForModuleFunction(module : PiStation.Module, func : PiStation.Function) {
-        return `${module.name}:${func.name}`;
+    callModuleFunction(module : PiStation.Module, func : PiStation.Function, args: PiStation.Argument[] = []) {
+        this.socket.emit(func.eventName, args);
     }
 }
