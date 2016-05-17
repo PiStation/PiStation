@@ -10,24 +10,37 @@ export interface PiStationServerEvent {
 
 export class PiStationServer {
     private socketServer:SocketIO.Server;
-    private modules:PiStation.AbstractModule[] = [];
+    private modules:PiStation.Module[] = [];
     private listeners:string[];
 
     public clientConnections:Rx.Observable<SocketIO.Socket>;
-    //private moduleFunctionCallStream: Rx.Observable<PiStation.Argument[]>;
 
     constructor(private port:number = 31415) {
         this.socketServer = io(port);
-        this.clientConnections = Rx.Observable.create((observer : any) => this.socketServer.on(`${PiStation.Events.CLIENT_CONNECTED}`,(socket : any) => observer.next(socket)));
+        console.log('Server Started');
+
+        this.clientConnections = Rx.Observable.create((observer : any) => {
+            this.socketServer.on(`${PiStation.Events.CLIENT_CONNECTED}`,(socket : SocketIO.Socket) => observer.next(socket))
+
+            this.socketServer.on('error', (error : any) => {
+                console.log('ERROR', error);
+                observer.error(error)
+            });
+        });
+
+
 
         this.clientConnections
             .forEach((socket : SocketIO.Socket) => console.log(`New client connection | ID: ${socket.client.id} IP address: ${socket.client.conn.remoteAddress}`));
         this.clientConnections
             .forEach((socket : SocketIO.Socket) => this.registerEventsForClient(socket));
 
-        //this.moduleFunctionCallStream = this.clientConnections
-        //    .flatMap((socket : SocketIO.Socket) =>
-        //        Rx.Observable.merge<>(...this.registerEventsForClient(socket));
+        this.on(`${PiStation.Events.GET_ALL_MODULES}`).subscribe( (event : PiStationServerEvent) => {
+            let json = this.modules.map(module => module.toDto());
+            console.log('Returning modules:',  json);
+            event.socket.emit(`${PiStation.Events.GET_ALL_MODULES}`, json);
+        });
+
     }
 
     addModule(module:PiStation.Module) {
@@ -43,6 +56,6 @@ export class PiStationServer {
 
     private registerEventsForClient(socket:SocketIO.Socket){
         this.modules
-            .forEach((module : PiStation.Module) => module.registerFunctionUpdatesForClient(socket));
+            .forEach((module : PiStation.Module) => { module.registerFunctionCallsForClient(socket)});
     }
 }

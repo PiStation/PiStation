@@ -1,7 +1,7 @@
 <md-list>
     <section *ngFor="let module of (modules | async)">
         <h3 md-subheader>{{module?.name}}</h3>
-        <md-list-item *ngFor="let function of module?.functions">
+        <md-list-item *ngFor="let function of module?.functions" (click)="callFunction(module, function)">
             <md-icon class="material-icons" md-list-avatar>folder</md-icon>
             <h4 md-line>{{function?.name}}</h4>
             <p md-line class="demo-2">{{function?.arguments?.length}} argument{{function?.arguments > 1 ? 's' : ''}} </p>

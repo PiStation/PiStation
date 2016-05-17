@@ -16,4 +16,9 @@ export class ModuleListComponent {
 	constructor(private moduleService : ModuleService){
         this.modules = this.moduleService.getAllModules();
 	}
+
+    callFunction(module, func){
+        console.log(module);
+        return this.moduleService.callModuleFunction(module, func)
+    }
 }

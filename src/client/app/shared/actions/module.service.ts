@@ -10,10 +10,13 @@ import Observable = Rx.Observable;
 
     getAllModules() : Rx.Observable<PiStation.Module[]> {
         this.socket.emit(`${PiStation.Events.GET_ALL_MODULES}`);
-        return Observable.fromEvent<PiStation.Module[]>(this.socket, `${PiStation.Events.GET_ALL_MODULES}`);
+
+        return Observable.fromEvent(this.socket, `${PiStation.Events.GET_ALL_MODULES}`)
+            .map((modulesJSON : any[]) => modulesJSON.map(module => new PiStation.Module(module.name, module.functions)));
     }
 
     callModuleFunction(module : PiStation.Module, func : PiStation.Function, args: PiStation.Argument[] = []) {
+        console.log(`Sending ${func.eventName} with arguments : ${args}`);
         this.socket.emit(func.eventName, args);
     }
 }

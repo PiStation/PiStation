@@ -1,53 +1,66 @@
 import {PiStationServer} from "../server/app/server";
 import * as Rx from 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject'
+import Subscription = Rx.Subscription;
 export interface AbstractModule {
-    register(app : PiStationServer) : PiStationServer;
-    toString() : string
+    name: string;
+    functions: Function[]
+    register?(app : PiStationServer) : PiStationServer;
 }
 export class Module implements AbstractModule {
-    name: string;
-    functions: Function[];
     functionCallStream : Rx.Observable<Function>;
+    name: string;
+    functions: Function[] = [];
 
     constructor(name: string, functionArray: Function[] = []) {
+
         this.name = name;
-        this.functions = functionArray;
+        functionArray.forEach(func => this.addFunction(new Function(func.name, func.arguments)));
     }
 
-    registerFunctionUpdatesForClient(clientSocket : SocketIO.Socket){
-        this.functionCallStream.merge(...this.functions.map((func:Function) =>
-            func.callStream
-                .merge(
-                    Rx.Observable
-                        .fromEvent(clientSocket, `${func.eventName}`)
-                        .map(args=> <Argument[]>args))));
-    }
+    registerFunctionCallsForClient(clientSocket : SocketIO.Socket){
+        this.functions.forEach((func:Function) =>
+            Rx.Observable
+                .fromEvent(clientSocket, `${func.eventName}`)
+                .map((json : any) => new Function(func.name, json))
+                .forEach((func : any) => console.log('function called ', func)));
 
-    register(app:PiStationServer):PiStationServer {
-        return app;
     }
-
 
     toString() : string {
         return this.name;
     }
 
     addFunction(func: Function) {
-        func.module = this;
+        func.moduleName = this.name;
         this.functions.push(func);
+    }
+
+    toDto():any {
+        return {
+            name: this.name,
+            functions: this.functions.map(func => func.toDto()),
+        }
     }
 }
 
 export class Function {
     arguments: Argument[];
     name: string;
-    module : Module;
-    callStream : Rx.Observable<Argument[]>;
+    moduleName : string;
+    callStream : Subject<Argument[]|{}>;
 
     constructor(name: string, argumentArray: Argument[] = []) {
         this.name = name;
         this.arguments = argumentArray;
-        this.callStream = Rx.Observable.empty<Argument[]>();
+        this.callStream = new Subject();
+    }
+
+    toDto(){
+        return {
+            name: this.name,
+            arguments: this.arguments
+        }
     }
 
     addArguments(arg: Argument) {
@@ -57,9 +70,8 @@ export class Function {
     toString() : string {
         return this.name;
     }
-
-    get eventName() : string {
-        return `${this.module || 'AnonymousFunction'}:${this.name}`;
+    get eventName() {
+        return `${this.moduleName || 'AnonymousFunction'}:${this.name}`;
     }
 }
 
@@ -72,6 +84,7 @@ export class Argument {
         this.name = name;
     }
 }
+
 export class ServerEvent {
     name: string;
     constructor(name : string) {
