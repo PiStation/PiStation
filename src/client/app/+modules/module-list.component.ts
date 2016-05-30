@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MD_LIST_DIRECTIVES} from '@angular2-material/list';
 
 import {ModuleService} from "../shared/index";
-import * as PiStation from "../../PiStation";
+import * as PiStation from "pistation-definitions/PiStation";
 import {Observable} from "rxjs/Observable";
 
 @Component({

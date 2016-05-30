@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import * as PiStation from '../../../PiStation';
+import * as PiStation from 'pistation-definitions/PiStation';
 import * as Rx from 'rxjs/Rx';
 
 import {fromEvent} from 'rxjs/Observable/fromEvent';

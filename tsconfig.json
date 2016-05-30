@@ -11,10 +11,8 @@
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true
+    "noImplicitUseStrict": false
   },
   "exclude": [
     "node_modules",

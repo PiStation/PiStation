@@ -1,5 +1,7 @@
+
 #Typings
 src/server/typings
+src/server/node_modules
 
 # Logs
 logs
