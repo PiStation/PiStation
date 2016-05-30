@@ -48,3 +48,5 @@ gulpfile.js.map
 
 connectors
 !connectors/.gitdir
+modules
+!modules/.gitdir
