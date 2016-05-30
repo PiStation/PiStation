@@ -1,3 +1,6 @@
+#Typings
+src/server/typings
+
 # Logs
 logs
 *.log
