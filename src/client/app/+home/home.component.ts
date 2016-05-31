@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 
 import { NameListService } from '../shared/index';
 import {ModuleService} from "../shared/index";
-
+import {MD_BUTTON_DIRECTIVES} from '@angular2-material/button';
 @Component({
   selector: 'sd-home',
   templateUrl: 'app/+home/home.component.html',
   styleUrls: ['app/+home/home.component.css'],
-  directives: [FORM_DIRECTIVES]
+  directives: [FORM_DIRECTIVES, MD_BUTTON_DIRECTIVES]
 })
 export class HomeComponent {
   newName: string;

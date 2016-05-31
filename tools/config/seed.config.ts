@@ -161,6 +161,11 @@ export class SeedConfig {
         defaultExtension: 'js',
         main: 'list.js'
       },
+      '@angular2-material/button': {
+        format: 'cjs',
+        defaultExtension: 'js',
+        main: 'list.js'
+      },
       '@angular2-material/icon': {
         format: 'cjs',
         defaultExtension: 'js',
