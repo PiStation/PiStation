@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import * as PiStation from 'pistation-definitions/PiStation';
 import * as Rx from 'rxjs/Rx';
 
-import {fromEvent} from 'rxjs/Observable/fromEvent';
 import Observable = Rx.Observable;
 
 @Injectable() export class ModuleService {
