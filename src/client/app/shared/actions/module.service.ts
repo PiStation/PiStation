@@ -14,8 +14,9 @@ import Observable = Rx.Observable;
             .map((modulesJSON : any[]) => modulesJSON.map(module => new PiStation.Module(module.name, module.functions)));
     }
 
-    callModuleFunction(module : PiStation.Module, func : PiStation.Function, args: PiStation.Argument[] = []) {
-        console.log(`Sending ${func.eventName} with arguments : ${args}`);
-        this.socket.emit(func.eventName, args);
+    callModuleFunction(module : PiStation.Module, func : PiStation.Function) {
+        console.log(`Sending ${func.eventName} with arguments : ${func.arguments}`);
+        this.socket.emit(func.eventName, func.arguments);
+        return Observable.fromEvent(this.socket, func.eventName); //return update stream to UI
     }
 }
