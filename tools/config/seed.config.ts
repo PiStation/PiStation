@@ -171,6 +171,11 @@ export class SeedConfig {
         defaultExtension: 'js',
         main: 'icon.js'
       },
+      '@angular2-material/slide-toggle': {
+        format: 'cjs',
+        defaultExtension: 'js',
+        main: 'icon.js'
+      },
     }
   };
 
