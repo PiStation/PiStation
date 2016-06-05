@@ -1,0 +1,13 @@
+<div [ngFormModel]="form">
+    <label [attr.for]="argument.key">{{argument.label}}</label>
+    <div [ngSwitch]="argument.controlType">
+        <input *ngSwitchWhen="'textbox'" [ngControl]="argument.key"
+               [id]="argument.key" [type]="argument.type">
+        <input *ngSwitchWhen="'checkbox'" [ngControl]="argument.key" [(ngModel)]="argument.value"
+               [id]="argument.key" [type]="argument.type">
+        <select [id]="argument.key" *ngSwitchWhen="'dropdown'" [ngControl]="argument.key">
+            <option *ngFor="let opt of argument.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+    </div>
+    <div class="errorMessage" *ngIf="!isValid">{{argument.label}} is required</div>
+</div>
