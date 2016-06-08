@@ -22,7 +22,7 @@ export class ModuleListComponent {
         })
 	}
 
-    callFunction(func){
-        this.moduleService.callModuleFunction(func);
+    callFunction(func, args){
+        this.moduleService.callModuleFunction(func, args);
     }
 }
