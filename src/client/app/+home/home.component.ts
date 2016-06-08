@@ -12,16 +12,14 @@ import {MdButton} from '@angular2-material/button';
 })
 export class HomeComponent {
   newName: string;
-  constructor(public nameListService: NameListService, actionService : ModuleService) {
+  constructor(actionService : ModuleService) {
 
   }
-
   /*
    * @param newname  any text as input.
    * @returns return false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {
-    this.nameListService.add(this.newName);
     this.newName = '';
     return false;
   }

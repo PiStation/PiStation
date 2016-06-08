@@ -1,4 +1,4 @@
-import { Component, Input, OnInit }  from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output}  from '@angular/core';
 import { ControlGroup }              from '@angular/common';
 import * as PiStation from '../../../../../node_modules/pistation-definitions/PiStation';
 import { DynamicArgumentFormComponent } from './dynamic-argument.form.component';
@@ -12,6 +12,8 @@ import {FunctionControlService} from "./../functions/function-control.service";
 })
 export class ArgumentsControlFormComponent {
     @Input('arguments') arguments: PiStation.Argument<any>[];
+    @Output('submit') submitStream : EventEmitter = new EventEmitter();
+
     form: ControlGroup;
     payLoad : string;
 
@@ -21,5 +23,6 @@ export class ArgumentsControlFormComponent {
     }
     onSubmit() {
         this.payLoad = JSON.stringify(this.form.value);
+        this.submitStream.next(this.form.value);
     }
 }

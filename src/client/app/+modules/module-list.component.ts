@@ -22,8 +22,7 @@ export class ModuleListComponent {
         })
 	}
 
-    callFunction(module, func){
-        console.log(module);
-        return this.moduleService.callModuleFunction(module, func)
+    callFunction(func){
+        this.moduleService.callModuleFunction(func);
     }
 }

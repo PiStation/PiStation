@@ -3,12 +3,12 @@ import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
 
 import { AboutComponent } from './+about/index';
 import { HomeComponent } from './+home/index';
-import { NameListService, NavbarComponent, ToolbarComponent, ModuleService} from './shared/index';
+import { NavbarComponent, ToolbarComponent, ModuleService} from './shared/index';
 import {ModuleListComponent} from "./+modules/module-list.component";
 
 @Component({
   selector: 'sd-app',
-  viewProviders: [NameListService, ModuleService],
+  viewProviders: [ModuleService],
   templateUrl: 'app/app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })

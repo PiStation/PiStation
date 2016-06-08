@@ -5,7 +5,7 @@
             <md-icon class="material-icons" md-list-avatar>folder</md-icon>
             <h4 md-line>{{function?.name}}</h4>
             <p md-line>
-                <arguments-control-form style="display: inline-block" [arguments]="function.arguments"></arguments-control-form>
+                <arguments-control-form style="display: inline-block" [arguments]="function.arguments" (submit)="callFunction(function)"></arguments-control-form>
             </p>
         </md-list-item>
         <md-divider></md-divider>
