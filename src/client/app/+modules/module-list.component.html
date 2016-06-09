@@ -6,7 +6,7 @@
             <h4 md-line>{{function?.name}}</h4>
             <h2 style="float:right;" [style.background]="(function?.updateStream | async)?.style" [innerHTML]="(function?.updateStream | async)?.value"></h2>
             <p md-line>
-                <arguments-control-form style="display: inline-block" [arguments]="function.arguments" (submit)="callFunction(function, $event)"></arguments-control-form>
+                <arguments-control-form style="display: inline-block" [arguments]="function.arguments" (onFunctionCall)="callFunction(function, $event)"></arguments-control-form>
             </p>
         </md-list-item>
         <md-divider></md-divider>

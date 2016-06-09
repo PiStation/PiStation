@@ -12,7 +12,7 @@ import {FunctionControlService} from "./../functions/function-control.service";
 })
 export class ArgumentsControlFormComponent {
     @Input('arguments') arguments: PiStation.Argument<any>[];
-    @Output('submit') submitStream : EventEmitter = new EventEmitter();
+    @Output('onFunctionCall') submitStream : EventEmitter = new EventEmitter();
 
     form: ControlGroup;
     payLoad : string;
