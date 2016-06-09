@@ -22,9 +22,9 @@ export class ModuleListComponent {
         })
 	}
 
-    callFunction(func, args){
-        let updateStream = this.moduleService.callModuleFunction(func, args);
-        updateStream.subscribe(update => {
+    callFunction(func : PiStation.Function, args){
+        func.updateStream = this.moduleService.callModuleFunction(func, args);
+        func.updateStream.subscribe(update => {
             console.log('function got call update: ', update);
         },
             (err)=> console.log('function error', err), () => console.log('function completed'));
