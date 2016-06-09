@@ -23,6 +23,6 @@ export class ArgumentsControlFormComponent {
     }
     onSubmit() {
         this.payLoad = JSON.stringify(this.form.value);
-        this.submitStream.next(this.form.value);
+        this.submitStream.emit(this.form.value);
     }
 }

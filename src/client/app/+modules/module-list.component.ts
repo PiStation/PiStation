@@ -23,6 +23,9 @@ export class ModuleListComponent {
 	}
 
     callFunction(func, args){
-        this.moduleService.callModuleFunction(func, args);
+        let updateStream = this.moduleService.callModuleFunction(func, args);
+        updateStream.subscribe(update => {
+            console.log('function got call update: ', update);
+        })
     }
 }
