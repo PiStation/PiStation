@@ -13,7 +13,7 @@ import {ArgumentsControlFormComponent} from "../shared/arguments/arguments-contr
 	templateUrl: 'app/+modules/module-list.component.html'
 })
 export class ModuleListComponent {
-    public modules : Observable<PiStation.Module[]>;
+    public modules : Rx.Observable<PiStation.Module[]>;
 
 	constructor(private moduleService : ModuleService) {
         this.modules = this.moduleService.getAllModules();
@@ -26,6 +26,7 @@ export class ModuleListComponent {
         let updateStream = this.moduleService.callModuleFunction(func, args);
         updateStream.subscribe(update => {
             console.log('function got call update: ', update);
-        })
+        },
+            (err)=> console.log('function error', err), () => console.log('function completed'));
     }
 }
