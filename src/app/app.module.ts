@@ -1,6 +1,6 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
@@ -16,13 +16,19 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InteralStateType } from './app.service';
 import { Home } from './home';
 import { About } from './about';
+import { ModuleListComponent } from "./+modules/module-list.component";
+import { ModuleService } from './shared/module.service.ts';
 import { NoContent } from './no-content';
 import { XLarge } from './home/x-large';
+import {ArgumentsControlFormComponent} from "./shared/arguments/arguments-control-form.component";
+import {DynamicArgumentFormComponent} from "./shared/arguments/dynamic-argument.form.component";
+import {FunctionControlService} from "./shared/functions/function-control.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  ModuleService
 ];
 
 type StoreType = {
@@ -41,17 +47,22 @@ type StoreType = {
     About,
     Home,
     NoContent,
-    XLarge
+    ModuleListComponent,
+    XLarge,
+    ArgumentsControlFormComponent,
+    DynamicArgumentFormComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
-    FormsModule,
     HttpModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(ROUTES, { useHash: true })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    FunctionControlService,
   ]
 })
 export class AppModule {

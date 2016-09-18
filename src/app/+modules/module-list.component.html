@@ -1,0 +1,12 @@
+<ul>
+    <section *ngFor="let module of (modules | async)">
+        <h3>{{module?.name}}</h3>
+        <li *ngFor="let function of module?.functions" (click)="showArguments = !showArguments">
+            <h4>{{function?.name}}</h4>
+            <h2 style="float:right;" [style.background]="(function?.updateStream | async)?.style" [innerHTML]="(function?.updateStream | async)?.value"></h2>
+            <p>
+                <arguments-control-form style="display: inline-block" [arguments]="function.arguments" (onFunctionCall)="callFunction(function, $event)"></arguments-control-form>
+            </p>
+        </li>
+    </section>
+</ul>

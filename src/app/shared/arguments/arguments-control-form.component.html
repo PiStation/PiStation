@@ -1,0 +1,10 @@
+<div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div *ngFor="let argument of arguments" class="inline" style="display: inline-block;">
+            <argument [argument]="argument" [form]="form"></argument>
+        </div>
+        <div class="form-row" style="display: inline-block;">
+            <button type="submit" [disabled]="!form.valid">Start Function</button>
+        </div>
+    </form>
+</div>
