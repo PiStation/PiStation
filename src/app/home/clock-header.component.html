@@ -1,6 +1,6 @@
 <header>
-  <h1 [innerText]="($currentTime | async)?.toLocaleTimeString()">00:00</h1>
+  <h1 [innerText]="($currentTime | async)?.toLocaleTimeString('nl-NL')">00:00</h1>
 </header>
 <section class="header-clock-content">
-  <h3>{{$currentTemperature|async}}&deg;C - {{location}}</h3>
+  <h3>{{$currentTemperature|async}}&deg;C {{location}}</h3>
 </section>

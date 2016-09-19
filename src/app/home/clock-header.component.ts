@@ -40,7 +40,7 @@ export class ClockHeaderComponent implements OnInit {
       .merge(Observable.interval(tenMinutes))
       .flatMap((trigger) => this.$http.get(this.weatherUrl, this.getWeatherRequestOptions()))
       .map((data:Response) => data.json())
-      .map((data:any) => <number>data.main.temp);
+      .map((data:any) => <number> Math.round(data.main.temp));
   }
 
   private getWeatherRequestOptions():RequestOptions {

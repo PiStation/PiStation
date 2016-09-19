@@ -1,4 +1,7 @@
-$family-serif: Roboto,"Georgia", serif;
+
+@import "fonts";
+
+$family-serif: "Open Sans","Georgia", serif;
 
 html, body{
   height: 100%;
