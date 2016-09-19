@@ -1,5 +1,5 @@
 <header>
-  <h1 [innerText]="($currentTime | async)?.toLocaleTimeString('nl-NL')">00:00</h1>
+  <h1>{{($currentTime | async)?.toLocaleTimeString('nl-NL') || '00:00:00'}}</h1>
 </header>
 <section class="header-clock-content">
   <h3 class="header-clock-label"><md-icon>cloud_queue</md-icon><span>{{$currentTemperature|async}}&deg;C {{location}}</span></h3>
