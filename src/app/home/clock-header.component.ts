@@ -11,7 +11,7 @@ export class ClockHeaderComponent implements OnInit {
   private appId = "554c20d9b7b3b741c265233e437e38aa";
   private weatherUrl = "http://api.openweathermap.org/data/2.5/weather";
 
-  $currentTime:Observable<any>;
+  $currentTime:Observable<Date>;
   $currentTemperature:Observable<number>;
 
   @Input('location') location:string;
