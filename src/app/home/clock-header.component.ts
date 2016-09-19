@@ -17,6 +17,7 @@ export class ClockHeaderComponent implements OnInit {
   @Input('location') location:string;
   @Input('room') room:string;
 
+  currentTime = new Date();
   constructor(private $http:Http) {
     this.$currentTime = this.createClock();
   }
