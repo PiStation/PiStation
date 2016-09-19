@@ -16,8 +16,18 @@
     letter-spacing: 9px;
     margin:0;
   }
-  
+
   h3 {
     text-align: center;
+  }
+
+  h3.header-clock-label md-icon,
+  h3.header-clock-label span {
+    display: flex;
+  }
+  h3.header-clock-label {
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
   }
 }
