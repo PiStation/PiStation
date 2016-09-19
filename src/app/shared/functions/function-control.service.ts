@@ -1,12 +1,12 @@
 import { Injectable }   from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import * as PiStation from 'pistation-definitions/PiStation';
+import {Argument} from 'pistation-definitions/PiStation';
 
 @Injectable()
 export class FunctionControlService {
     constructor(private fb:FormBuilder){ }
 
-    argumentsToControlGroup(args : PiStation.Argument<any>[]) : FormGroup {
+    argumentsToControlGroup(args : Argument<any>[]) : FormGroup {
         let group = {};
 
         args.forEach(argument => {
