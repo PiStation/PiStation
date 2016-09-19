@@ -1,0 +1,23 @@
+:host {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  min-height:40vh;
+  header {
+    width: 100%;
+    text-align:center;
+  }
+
+  h1 {
+    font-family: Roboto-Thin, Roboto, sans-serif;
+    font-size: 150px;
+    font-weight: 100;
+    color: #FFFFFF;
+    letter-spacing: 9px;
+    margin:0;
+  }
+  
+  h3 {
+    text-align: center;
+  }
+}

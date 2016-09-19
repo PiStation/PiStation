@@ -23,6 +23,7 @@ import { XLarge } from './home/x-large';
 import {ArgumentsControlFormComponent} from "./shared/arguments/arguments-control-form.component";
 import {DynamicArgumentFormComponent} from "./shared/arguments/dynamic-argument.form.component";
 import {FunctionControlService} from "./shared/functions/function-control.service";
+import {ClockHeaderComponent} from "./home/clock-header.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -51,6 +52,7 @@ type StoreType = {
     XLarge,
     ArgumentsControlFormComponent,
     DynamicArgumentFormComponent,
+    ClockHeaderComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

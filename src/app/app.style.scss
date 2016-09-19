@@ -1,0 +1,20 @@
+$family-serif: Roboto,"Georgia", serif;
+
+html, body{
+  height: 100%;
+  background: #2C2C2C;
+  font-family: $family-serif;
+  color: rgba(255,255,255,90);
+}
+
+h1, h2, h3, h4 {
+  color: #ffffff;
+}
+
+h3 {
+  font-weight: 300;
+  font-size: 18px;
+}
+span.active {
+  background-color: gray;
+}
