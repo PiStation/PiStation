@@ -4,8 +4,11 @@ import {Observable} from "rxjs/Rx";
 import * as io from 'socket.io-client';
 
 @Injectable() export class ModuleService {
-    private socket : SocketIOClient.Socket = io.connect('http://localhost:31415');
+    private socket : SocketIOClient.Socket = io.connect(`http://${API_URL}:${API_PORT}`);
 
+    constructor(){
+      console.log(`http://${API_URL}:${API_PORT}`);
+    }
     getAllModules() : Observable<PiStation.Module[]> {
         this.socket.emit(`${PiStation.Events.GET_ALL_MODULES}`);
 

@@ -50,12 +50,16 @@ declare module '*';
 declare var ENV: string;
 declare var HMR: boolean;
 declare var System: SystemJS;
+declare var API_URL: string;
+declare var API_PORT: number;
 
 interface SystemJS {
   import: (path?: string) => Promise<any>;
 }
 
 interface GlobalEnvironment {
+  API_URL: string;
+  API_PORT :number;
   ENV: string;
   HMR: boolean;
   SystemJS: SystemJS;
