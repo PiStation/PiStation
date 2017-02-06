@@ -1,3 +1,7 @@
 <h1>
-  {{title}}
+  <button [style.background] = "(buttonStateBg | async)"
+          style="height:50px; width: 50px; margin:0 auto; display: block;"
+          (click)="toggleLight()">
+
+  </button>
 </h1>
